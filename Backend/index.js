@@ -26,7 +26,7 @@ async function run() {
     const bookCollections = client.db("BookInventory").collection("books");
 
     // Insert a book to the db (post)
-    app.post("/upload-book", async(req, res) => {
+    app.post("/upload-book", async (req, res) => {
       const data = req.body;
       const result = await bookCollections.insertOne(data);
       res.send(result);
@@ -62,7 +62,7 @@ async function run() {
     });
 
     // Update a book's data 
-    app.patch("/book/:id", async(req, res) => {
+    app.patch("/book/:id", async (req, res) => {
       const id = req.params.id;
       const updateBookData = req.body;
       const filter = { _id: new ObjectId(id) };
@@ -78,7 +78,7 @@ async function run() {
     });
 
     // Delete a book
-    app.delete("/book/:id", async(req, res) => {
+    app.delete("/book/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const result = await bookCollections.deleteOne(filter);
@@ -86,7 +86,7 @@ async function run() {
     });
 
     // Search by category
-    app.get("/all-bookss", async(req, res) => {
+    app.get("/all-bookss", async (req, res) => {
       let query = {};
       if (req.query?.category) {
         query = { category: req.query.category };
@@ -96,7 +96,7 @@ async function run() {
     });
 
     // GET single book
-    app.get("/book/:id", async(req, res) => {
+    app.get("/book/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const result = await bookCollections.findOne(filter);
@@ -108,15 +108,15 @@ async function run() {
 
 
 
-   // Create a collection for orders
-const orderCollections = client.db("BookInventory").collection("orders");
+    // Create a collection for orders
+    const orderCollections = client.db("BookInventory").collection("orders");
 
 
-  app.post("/place-order", async (req, res) => {
+    app.post("/place-order", async (req, res) => {
       const orderData = req.body;
       const result = await orderCollections.insertOne(orderData);
       res.send(result);
-  });
+    });
 
     // ping to confirm successful connection
     await client.db("admin").command({ ping: 1 });
