@@ -1,0 +1,6 @@
+/*prevent navbar from clipping through other elements such as the book card*/
+/*header, nav means it's targeting the <header> and <nav> element */
+/* Elements with a higher z-index value are displayed in front of elements with a lower z-index value.*/
+header, nav{
+    z-index:100001 !important;
+}
